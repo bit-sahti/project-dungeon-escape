@@ -44,6 +44,17 @@ class Board {
         this.context.beginPath()
         this.context.fillRect(x + centeringFactor, y + centeringFactor, width, height)
         this.context.closePath()
+
+        // let i = 0
+        // for (let i = 0; i < 2; i++) {
+            // setInterval(() => {
+            //     i++
+            //     this.context.clearRect(x + centeringFactor, y + centeringFactor, width, height)
+            //     this.context.beginPath()
+            //     this.context.fillRect(x + (i * 100) + centeringFactor, y + (i * 100) + centeringFactor, width, height)
+            //     this.context.closePath()
+            // }, 1000)
+        // }
     }
 }
 
@@ -68,3 +79,9 @@ console.log(player)
 // console.log(dungeon.map[4][0].x);
 
 // console.log(document)
+
+console.log(dungeon.reference.offsetTop)
+
+dungeon.reference.addEventListener('click', event => {
+    console.log(event.pageX, event.pageY)
+})
