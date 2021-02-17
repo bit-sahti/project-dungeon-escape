@@ -41,7 +41,7 @@ class Board {
         const xCenteringFactor = (this.parcialWidth - component.width ) / 2;
         const yCenteringFactor = (this.parcialHeight - component.height) / 2
 
-        // console.log(calc)
+        console.log('drawing')
         this.context.fillStyle = 'red'
         this.context.beginPath()
         this.context.fillRect(x + xCenteringFactor, y + yCenteringFactor, component.width, component.height)
@@ -56,15 +56,71 @@ class Board {
     }
 
     move (component, x, y, movements) {
-        // let 
-        // if()
+        if (component.x !== x && component.y !== y) {
+            console.log('hum')
+            return window.alert('not allowed')
+        }
+
+        if (x > component.x) {
+            this.moveRight(component, x, movements);
+        } else if (x < component.x) {
+            this.moveLeft(component, x, movements);
+        } else if (y > component.y) {
+            this.moveDown(component, y, movements);
+        } else if (y < component.y) {
+            this.moveUp(component, y, movements);
+        } 
+    }
+
+    moveRight(component, x, moves) {
+        if (x - component.x > moves) {
+            return window.alert('not enought moves')
+        }
 
         component.x = x;
-        component.y = y;
-        
+        this.drawAll(component)
 
+    //     let movements = x - component.x
+        
+    //     for (let i = 0; i < movements; i++) {
+    //         setInterval(() => {
+    //             component.x++;
+    //             console.log(component.x)
+    //         // console.log(i)
+    //             this.drawComponent(component)
+    //         }, 2000)
+
+    //     }
+    }
+
+    moveLeft(component, x, moves) {
+        if (component.x - x > moves) {
+            return window.alert('not enought moves')
+        }
+
+        component.x = x;
         this.drawAll(component)
     }
+
+    moveDown(component, y, moves) {
+        if (y - component.y > moves) {
+            return window.alert('not enought moves')
+        }
+
+        component.y = y;
+        this.drawAll(component)
+    }
+
+    moveUp(component, y, moves) {
+        if (component.y - y > moves) {
+            return window.alert('not enought moves')
+        }
+
+        component.y = y;
+        this.drawAll(component)
+    }
+    
+    
 
     drawAll(component) {
         this.context.clearRect(0, 0, this.totalWidth, this.totalHeight);
@@ -88,7 +144,7 @@ let dungeon = new Board(5, 5, 100, 100)
 dungeon.build()
 dungeon.drawMap()
 
-let player = new Player(4, 3, 20, 7)
+let player = new Player(0, 2, 20, 7)
 
 dungeon.drawComponent(player)
 
